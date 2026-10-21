@@ -1,9 +1,21 @@
 import { test, expect } from '@playwright/test';
-test('has title', async ({ page }) => {
+
+const Links_To_Test = ['Big page with many elements',
+  'Fake Landing Page',
+  'Fake Pricing Page',
+  'Fill out forms',
+  'Learn how to automate an application that evolves over time',
+  'Login automation',
+  'Interactions with simple elements'];
+
+test('Automate clicking each practice link, navigating, and returning', async ({ page }) => {
   await page.goto('https://ultimateqa.com/automation');
-  //expect a title "to contain" a substring.
+
+  for (const linkText of Links_To_Test) {
+    await page.getByRole('link', { name: linkText }).click();
+    await page.waitForLoadState('networkidle');
+    await page.goBack();
+  }
   await expect(page).toHaveTitle(/Automation Practice | Ultimate QA/);
-  await page.waitForTimeout(10000);
-  await page.getByRole('link', { name: 'Big page with many elements' }).click();
-  await page.waitForTimeout(10000);
+  console.log('All links have been clicked and navigated back successfully.');
 });
