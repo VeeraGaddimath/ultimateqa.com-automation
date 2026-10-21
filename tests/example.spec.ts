@@ -13,7 +13,7 @@ test('Automate clicking each practice link, navigating, and returning', async ({
 
   for (const linkText of Links_To_Test) {
     await page.getByRole('link', { name: linkText }).click();
-    await page.waitForLoadState('networkidle');
+    await page.waitForLoadState('domcontentloaded');
     await page.goBack();
   }
   await expect(page).toHaveTitle(/Automation Practice | Ultimate QA/);
