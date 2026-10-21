@@ -35,5 +35,13 @@ test.describe('Ultimate QA Automation Practice Tests', () => {
     await page.waitForLoadState('networkidle');
     await expect(page).toHaveTitle(/Form/);
     console.log('Successfully navigated to the discovery session page.');
+    const userName = page.getByRole('textbox', { name: '0-1/firstname' });
+    await userName.fill('John Doe');
+    const emailInput = page.getByRole('textbox', { name: '0-1/email' });
+    await emailInput.fill('john.doe@example.com');
+    const roleInput = page.getByRole('textbox',{name: '0-1/role'});
+    await roleInput.fill('Software Engineer');
+    const companyInput = page.getByRole('textbox', { name: '0-2/name' });
+    await companyInput.fill('Tech Solutions Inc.');
   });
 });
